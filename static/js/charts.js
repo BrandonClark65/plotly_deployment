@@ -86,9 +86,74 @@ function buildCharts(sample) {
     }];
     // 9. Create the layout for the bar chart. 
     var barLayout = {
-      title: "Top 10 Bacteria Cultures Found"
+      title: "<b>Top 10 Bacteria Cultures Found</b>"
     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout);
+
+    // BUBBLE CHART
+    // 1. Create the trace for the bubble chart.
+    var bubbleData = [{
+      x: otuIDs,
+      y: sampleValues,
+      // hover text
+      text: otuLabels,
+      mode: 'markers',
+      marker: {
+        // Use otu_ids for the marker colors
+        color: otuIDs,
+        // Use sample_values for the marker size
+        size: sampleValues,
+        colorscale: 'Portland'
+      }
+    }];
+    
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: "<b>Belly Button Samples</b>",
+      xaxis: { title: "OTU IDs" },
+      yaxis: { title: "Sample Values" }
+    };
+    
+    // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
+
+    // GAUGE CHART 
+    // 1. Create a variable that filters the metadata array for the object with the desired sample number.
+    // Create a variable that holds the first sample in the array.
+    var metadata = data.metadata;
+    var filteredMetadata = metadata.filter(obj => obj.id == sample)[0];
+    
+  
+    // 3. Create a variable that holds the washing frequency.
+    var washFreq = parseFloat(filteredMetadata.wfreq);
+
+    // Create the Trace
+    var gaugeData = [{
+      value: washFreq,
+      title: {text: "<b>Belly Button Washing Frequency (Times per Week)</b>",
+              font: {size: 17}
+              },
+      type: "indicator",
+      mode: "gauge+number",
+      gauge: {
+        bar: {color: 'black'},
+        axis: { range: [null, 10] },
+        steps: [
+            { range: [0, 2], color: 'rgb(214, 39, 40)' },
+            { range: [2, 4], color: 'rgb(255, 255, 0)' },
+            { range: [4, 6], color: 'rgb(127, 0, 255)' },
+            { range: [6, 8], color: 'rgb(0, 0, 255)' },
+            { range: [8, 10], color: 'rgb(0, 204, 0)' },
+        ]},
+    }];
+
+    // Define Plot Lay
+    var gaugeLayout = {
+      width: 500, height: 400, margin: { t: 0, b: 0 } 
+    };
+
+    // Plot the data
+    Plotly.newPlot('gauge', gaugeData, gaugeLayout);
   });
 }
