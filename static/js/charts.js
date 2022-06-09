@@ -83,6 +83,7 @@ function buildCharts(sample) {
       text: otuLabels.slice(0,10).reverse(),
       type: 'bar',
       orientation: 'h',
+      marker: {color: 'rgb(0,0,153'}
     }];
     // 9. Create the layout for the bar chart. 
     var barLayout = {
@@ -140,11 +141,11 @@ function buildCharts(sample) {
         bar: {color: 'black'},
         axis: { range: [null, 10] },
         steps: [
-            { range: [0, 2], color: 'rgb(214, 39, 40)' },
-            { range: [2, 4], color: 'rgb(255, 255, 0)' },
-            { range: [4, 6], color: 'rgb(127, 0, 255)' },
-            { range: [6, 8], color: 'rgb(0, 0, 255)' },
-            { range: [8, 10], color: 'rgb(0, 204, 0)' },
+            { range: [0, 2], color: 'rgb(153, 204, 255)' },
+            { range: [2, 4], color: 'rgb(102, 178, 255)' },
+            { range: [4, 6], color: 'rgb(51, 153, 255)' },
+            { range: [6, 8], color: 'rgb(0, 128, 255)' },
+            { range: [8, 10], color: 'rgb(0, 102, 204)' },
         ]},
     }];
 
